@@ -19,3 +19,9 @@ body {
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+@layer components {
+  .box {
+    @apply border border-white bg-gray-200 dark:border-zinc-800 dark:bg-zinc-900;
+  }
+}
