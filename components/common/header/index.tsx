@@ -1,6 +1,7 @@
 import Link from "next/link";
 import ChannelList from "./ChannelList";
 import UserData from "./UserData";
+import Notification from "./Notification";
 
 const Header = () => {
   return (
@@ -18,7 +19,14 @@ const Header = () => {
             주요 채널
           </ChannelList>
         </div>
-        <div key="header-user-section" className="flex">
+        <div key="header-user-section" className="flex gap-2">
+          <div>
+            <Link href="/">뉴스</Link>
+          </div>
+          <div>
+            <Link href="/">위키</Link>
+          </div>
+          <Notification />
           <UserData />
         </div>
       </div>
