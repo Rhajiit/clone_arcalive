@@ -29,7 +29,7 @@ const ChannelList = ({
         {children}
       </button>
       {isDropdownOpen && (
-        <ul className="box absolute w-max p-2">
+        <ul className="wrapper absolute w-max p-2">
           {isChannelListEmpty
             ? "채널이 없습니다."
             : dropdownChannelList.map((item) => (

@@ -5,7 +5,7 @@ import Notification from "./Notification";
 
 const Header = () => {
   return (
-    <header className="box">
+    <header className="wrapper">
       <div
         key="header-content"
         className="m-auto flex w-full max-w-[1200px] justify-between p-5"
