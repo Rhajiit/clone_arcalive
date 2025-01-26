@@ -1,5 +1,4 @@
-export {};
-
-declare global {
-  const _mongo: Promise<MongoClient> | undefined;
+export declare global {
+  // eslint-disable-next-line no-var
+  var _mongo: Promise<MongoClient> | undefined;
 }
