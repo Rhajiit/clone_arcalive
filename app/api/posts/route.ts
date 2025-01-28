@@ -21,7 +21,7 @@ export async function POST(request: NextRequest) {
   try {
     if (request.body === null)
       throw new Error("보내고자 하는 내용이 없습니다.");
-    const requestBody = request.body;
+    const requestBody = await request.json();
 
     const client = await connectDB;
     const db = client.db("posts_db");
