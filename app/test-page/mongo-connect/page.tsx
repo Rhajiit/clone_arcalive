@@ -1,12 +1,23 @@
 "use client";
 
-import dbTest from "@/utils/test-page-only/db-connect";
+import { requestCreationPost, requestPostList } from "@/utils/request";
 
 export default function Home() {
-  const mongoTest = async () => {
-    const result = await dbTest();
+  const mongoGetTest = async () => {
+    const result = await requestPostList();
     console.log(result);
   };
+  const mongoTest = async () => {
+    await requestCreationPost({
+      name: "test",
+      content: "test content",
+    });
+  };
 
-  return <button onClick={() => mongoTest()}>asdfasdf</button>;
+  return (
+    <>
+      <button onClick={() => mongoTest()}>mongoPost</button>
+      <button onClick={() => mongoGetTest()}>mongoGet</button>
+    </>
+  );
 }
