@@ -10,15 +10,16 @@ import { RequestCreationOfPostType } from "@/types/api-request/post";
 const requestBase = async <T>(
   route: string,
   method: string,
-  requestBody?: string,
+  body?: object,
 ): Promise<T | RequestError> => {
   let response;
+  const JSON_BODY = body ? JSON.stringify(body) : null;
 
   try {
     response = await fetch(route, {
       method: method,
       headers: { "Content-Type": "application/json" },
-      body: requestBody ? requestBody : undefined,
+      body: JSON_BODY ? JSON_BODY : undefined,
     });
 
     if (response.ok === false) throw new Error();
@@ -40,8 +41,7 @@ const requestPostList = async () => {
   return response;
 };
 
-const requestCreationPost = async (rawRequest: RequestCreationOfPostType) => {
-  const request = JSON.stringify(rawRequest);
+const requestCreationPost = async (request: RequestCreationOfPostType) => {
   const response = await requestBase("/api/posts", "POST", request);
 
   return response;
