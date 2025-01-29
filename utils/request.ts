@@ -1,8 +1,10 @@
 import { RequestError } from "@/types/api-request";
 import {
+  CreationOfPostType,
   RequestCreationOfPostType,
   RequestDeletePostType,
   RequestUpdatePostType,
+  UpdatePostType,
 } from "@/types/api-request/post";
 
 /**
@@ -45,14 +47,27 @@ const requestPostList = async () => {
   return response;
 };
 
-const requestCreationPost = async (request: RequestCreationOfPostType) => {
-  const response = await requestBase("/api/posts", "POST", request);
+const requestCreationPost = async (request: CreationOfPostType) => {
+  const timeStamp = new Date().toISOString();
+  const requestTimeStamped: RequestCreationOfPostType = {
+    ...request,
+    createdAt: timeStamp,
+    updatedAt: timeStamp,
+  };
+
+  const response = await requestBase("/api/posts", "POST", requestTimeStamped);
 
   return response;
 };
 
-const requestUpdatePost = async (request: RequestUpdatePostType) => {
-  const response = await requestBase("/api/posts", "PUT", request);
+const requestUpdatePost = async (request: UpdatePostType) => {
+  const timeStamp = new Date().toISOString();
+  const requestTimeStamped: RequestUpdatePostType = {
+    ...request,
+    updatedAt: timeStamp,
+  };
+
+  const response = await requestBase("/api/posts", "PUT", requestTimeStamped);
 
   return response;
 };
