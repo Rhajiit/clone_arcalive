@@ -1,6 +1,7 @@
 import { RequestError } from "@/types/api-request";
 import {
   RequestCreationOfPostType,
+  RequestDeletePostType,
   RequestUpdatePostType,
 } from "@/types/api-request/post";
 
@@ -56,4 +57,15 @@ const requestUpdatePost = async (request: RequestUpdatePostType) => {
   return response;
 };
 
-export { requestPostList, requestCreationPost, requestUpdatePost };
+const requestDeletePost = async (request: RequestDeletePostType) => {
+  const response = await requestBase("/api/posts", "DELETE", request);
+
+  return response;
+};
+
+export {
+  requestPostList,
+  requestCreationPost,
+  requestUpdatePost,
+  requestDeletePost,
+};

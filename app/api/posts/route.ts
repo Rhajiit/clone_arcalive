@@ -83,7 +83,10 @@ export async function DELETE(request: NextRequest) {
     if (result.acknowledged === false)
       throw new Error("예상치 못한 이유로 삭제을 실패하였습니다.");
 
-    return new Response(null, { status: 200, statusText: "OK" });
+    return new Response(JSON.stringify(result), {
+      status: 200,
+      statusText: "OK",
+    });
   } catch (error) {
     return new Response(JSON.stringify(error), { status: 400 });
   }

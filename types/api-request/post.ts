@@ -14,8 +14,13 @@ interface RequestUpdatePostType {
   content: string;
 }
 
+interface RequestDeletePostType {
+  id: string;
+}
+
 export type {
   RequestTypeGetOfPost,
   RequestCreationOfPostType,
   RequestUpdatePostType,
+  RequestDeletePostType,
 };
