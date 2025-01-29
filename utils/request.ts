@@ -1,5 +1,8 @@
 import { RequestError } from "@/types/api-request";
-import { RequestCreationOfPostType } from "@/types/api-request/post";
+import {
+  RequestCreationOfPostType,
+  RequestUpdatePostType,
+} from "@/types/api-request/post";
 
 /**
  *
@@ -47,4 +50,10 @@ const requestCreationPost = async (request: RequestCreationOfPostType) => {
   return response;
 };
 
-export { requestPostList, requestCreationPost };
+const requestUpdatePost = async (request: RequestUpdatePostType) => {
+  const response = await requestBase("/api/posts", "PUT", request);
+
+  return response;
+};
+
+export { requestPostList, requestCreationPost, requestUpdatePost };

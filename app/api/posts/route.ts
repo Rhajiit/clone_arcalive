@@ -1,6 +1,7 @@
 "use server";
 
 import { connectDB } from "@/utils/database";
+import { ObjectId } from "mongodb";
 import { NextRequest } from "next/server";
 
 export async function GET() {
@@ -45,21 +46,25 @@ export async function POST(request: NextRequest) {
 
 export async function PUT(request: NextRequest) {
   const modifiedContent = await request.json();
+  console.log(modifiedContent.id);
 
   try {
     const client = await connectDB;
     const db = client.db("clone-arcalive");
-    const result = await db
-      .collection("posts")
-      .updateOne(
-        { _id: modifiedContent.id },
-        { name: modifiedContent.name, content: modifiedContent.content },
-      );
+    const result = await db.collection("posts").updateOne(
+      { _id: new ObjectId(modifiedContent.id) }, // 필터 조건
+      {
+        $set: { name: modifiedContent.name, content: modifiedContent.content },
+      },
+    );
 
     if (result.acknowledged === false)
       throw new Error("예상치 못한 이유로 수정을 실패하였습니다.");
 
-    return new Response(null, { status: 200, statusText: "OK" });
+    return new Response(JSON.stringify(result), {
+      status: 200,
+      statusText: "OK",
+    });
   } catch (error) {
     return new Response(JSON.stringify(error), { status: 400 });
   }
@@ -73,7 +78,7 @@ export async function DELETE(request: NextRequest) {
     const db = client.db("clone-arcalive");
     const result = await db
       .collection("posts")
-      .deleteOne({ _id: deleteTarget.id });
+      .deleteOne({ _id: new ObjectId(deleteTarget.id) });
 
     if (result.acknowledged === false)
       throw new Error("예상치 못한 이유로 삭제을 실패하였습니다.");

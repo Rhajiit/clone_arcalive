@@ -8,4 +8,14 @@ interface RequestCreationOfPostType {
   content: string;
 }
 
-export type { RequestTypeGetOfPost, RequestCreationOfPostType };
+interface RequestUpdatePostType {
+  id: string;
+  name: string;
+  content: string;
+}
+
+export type {
+  RequestTypeGetOfPost,
+  RequestCreationOfPostType,
+  RequestUpdatePostType,
+};
